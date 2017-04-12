@@ -18,6 +18,10 @@ end
 ```terminal
 $ rake searchkick:reindex:all
 ```
+또는 필요한 모델만 적용시킬수 있다.
+```terminal
+$ rake searchkick:reindex CLASS=모델명
+```
 
 ### 3. `searchkick` 사용하기
 ```ruby
@@ -35,12 +39,21 @@ end
 
 ### 4. 실제 사용해보기
 ##### ISSUE 1
-* `ku_festival` 에서는 `daum map API`에서의 검색기능을 적용하기 위해 ajax와 json파일을 만들어주어야 했다.
+* `ku_festival` 에서는 `daum map API`에서의 검색기능을 적용하기 위해 json파일을 만들어주어야 했다.
 
 ##### ISSUE 2
 * form을 통해 검색 키워드를 입력받아야 했다.
 
 ##### SOLVE 1
+* `render:json`이 적용되지 않아서 github문서를 참조했다. 다음과 같이 해결할 수 있었다.
+```ruby
+render json: User.search(params[:search], {
+  fields: ["name", "age"],
+  limit: 10,
+  load: false,
+  misspellings: false
+})
+```
 
 ##### SOLVE 2
 **controller에서 search 액션 지정, routes.rb 에서 get "users/search" 지정 이후**
@@ -73,6 +86,8 @@ end
 ```
 
 ## 참고
-* github : **https://github.com/ankane/searchkick**
-* Tutorial : **http://www.munocreative.com/nerd-notes/tutor-portal**
-* StackOverflow : **http://stackoverflow.com/questions/24618807/couldnt-find-user-with-id-search**
+| 참고 | url |
+|:--------:|:--------:|
+| github | **https://github.com/ankane/searchkick**<br>**https://github.com/mackenziechild/movie_review** |
+| Tutorial | **http://www.munocreative.com/nerd-notes/tutor-portal** |
+| StackOverflow | **http://stackoverflow.com/questions/24618807/couldnt-find-user-with-id-search** |
