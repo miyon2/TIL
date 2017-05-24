@@ -1,7 +1,7 @@
 # Javascript의 자료형과 변수
 
 ## 1.변수
-** *위치(주소)를 기억하는 저장소* **
+***위치(주소)를 기억하는 저장소***
 
 메모리에 값을 저장하기 위해서는 필요한 저장단위(byte)를 알아야한다.
 값의 종류에 따라 값을 저장하기 위해 확보해야할 메모리의 크기가 다르기 때문이다. 이때의 값의 종류 즉 데이터의 종류를 자료형(Data Type)이라 한다.
@@ -10,10 +10,10 @@
 > 그러나 JavaScript는 Dynamic Typing 언어로 변수의 변수선언이 필요없이 값이 할당되는 과정에서 자동으로 자료형이 결정된다.
 
 ## 2. Data Type
-** *여러 종류의 데이터를 식별하는 분류* **
+***여러 종류의 데이터를 식별하는 분류***
 
 #### 2-1 Primitive Data Type(기본자료형)
-** *변경 불가능한 값(immutable value), pass-by-value* **
+***변경 불가능한 값(immutable value), pass-by-value***
 
 ###### 2-1-1 Boolean
 논리적인 요소를 나타내며 `true`, `false` 두가지 값을 가질 수 있다.
@@ -95,7 +95,7 @@ C의 `enum`형과도 비슷하며, 변경불가능한 기본값이다. object의
 * 대/소문자 구별이 가능하다.
 
 ## 3. Dynamic Typing
-** *동적타이핑이란?* **
+***동적타이핑이란?***
 JavaScript는 `Dynamic typed` 언어 혹은 `loosely typed` 언어다.
 변수의 선언이 필요없이 값이 할당되는 과정에서 자동으로 자료형이 결정된다는 뜻이다.
 따라서 같은 변수에 여러 data type의 값을 대입할 수 있다.
@@ -112,7 +112,7 @@ console.log(foo); // ③ 456
 ```
 1에서 undefined가 출력되는 이유는 **모든 선언문은 호이스팅(Hoisting)되기 때문이다.**
 
-*`호이스팅(Hoisting)`은 JavaScript변수 생성과 할당이 분리되어 진행되기 때문에 일어나는 현상으로, var 또는 function 선언문을 Scope의 맨 위로 옮기는 것을 말한다.*
+*호이스팅(Hoisting)은 JavaScript변수 생성과 할당이 분리되어 진행되기 때문에 일어나는 현상으로, var 또는 function 선언문을 Scope의 맨 위로 옮기는 것을 말한다.*
 
 JavaScript의 변수는 다른 C-family와 달리 block-level-scope를 가지지 않고 function-level-scope를 갖는다.
 >cf> let keyword를 사용하면 block-level-scope를 사용할 수 있다.
