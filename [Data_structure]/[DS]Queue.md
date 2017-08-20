@@ -43,3 +43,29 @@ typedef struct tagCircularQueue{
 }CircularQueue;
 ```
 
+#### 2. 순환 큐의 생성
+순환 큐를 생성하는 `CQ_CreateQueue()`함수는 순환 큐에 대한 포인터인 **Queue**와 용량을 결정하는 **Capacity**를 매개 변수로 받는다.
+`CQ_CreateQueue()` 함수는 먼저 순환 큐를 자유 저장소에 생성한 다음, `Node의 크기 X (Capacity + 1)`의 크기로 배열을 자유 저장소에 할당한다. (상태 구분을 위한 Dummy Node가 필요하기 때문)
+```c
+void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
+	/* Queue를 자유 저장소에 생성 */
+    (*Queue) = (CircularQueue*)malloc(sizeof(CircularQueue));
+    
+    /* 입력된 Capacity+1 만큼의 노드를 자유 저장소에 생성 */
+    (*Queue)->Nodes = (Node*)malloc(sizeof(Node)*(Capacity + 1));
+    
+    (*Queue)->Capacity = Capacity; /* 큐가 수용할 실제 용량을 저장 */
+    (*Queue)->Front = 0;
+    (*Queue)->Rear = 0;
+}
+```
+
+```c
+void CQ_DestroyQueue(CircularQueue* Queue){
+	free(Queue->Nodes);
+    free(Queue);
+}
+```
+
+#### 3. 삽입(Enqueue)연산
+
