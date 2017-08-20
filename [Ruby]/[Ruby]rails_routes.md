@@ -1,11 +1,11 @@
-#Rails Routing
+# Rails Routing
 1. routes.rb를 읽는 방법
 2. 직접 라우팅을 작성하는 방법 (리소스 베이스 & match 메소드)
 3. 컨트롤러의 액션에 넘길 라우트 매개변수를 선언하는 방법
 4. 라우트 헬퍼를 사용해서 경로나 URL을 자동생성하는 방법
 5. 제한을 추가하거나 Rack 엔드포인트 추가하는 방법
 
-##1. 라우터의 목적
+## 1. 라우터의 목적
 ### **++컨트롤러의 액션에 요청 매칭시켜주기!++**
 ```ruby
 GET /posts/17 					 #이러한 요청을 받을경우
@@ -30,8 +30,8 @@ get '/posts/:id', to: 'posts#show', as: 'post'
 <%= link_to 'Show Post', post_path(@post) %>
 ```
 
-##2. RESTful한 라우팅 선언하기
-#####* `resources :posts` 를 선언하면?
+## 2. RESTful한 라우팅 선언하기
+##### * `resources :posts` 를 선언하면?
 1. 7가지 라우팅 생성
 >`index`/`new`/`create`/`show`/`edit`/`update`/`destroy` 
 2. `posts_path`는 `/posts`를 돌려준다.
@@ -39,7 +39,7 @@ get '/posts/:id', to: 'posts#show', as: 'post'
 4. `edit_posts_path(:id)`는 `/posts/:id/edit`을 돌려준다.
 5. `posts_path(:id)`는 `/posts/:id`를 돌려준다.
 
-#####* 네임스페이스로 컨트롤러 그룹묶기
+##### * 네임스페이스로 컨트롤러 그룹묶기
 1. 블록 사용하기
 ```ruby
 namespace :admin do
