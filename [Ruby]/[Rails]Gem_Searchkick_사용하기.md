@@ -1,4 +1,4 @@
-#Searchkick
+# Searchkick
 ### 1. `elasticsearch` 설치하기
 ```terminal
 $ brew install elasticsearch
