@@ -33,9 +33,9 @@ typedef struct tagNode{
 
 ```c
 typedef struct tagArrayStack{
-	int		Capacity;	/* 용량 */
-    int		Top;		 /* 최상위 노드의 위치 */
-    Node*	  Nodes;	   /* 노드 배열 */
+    int		  Capacity;	 /* 용량 */
+    int		  Top;		 /* 최상위 노드의 위치 */
+    Node*	  Nodes;	 /* 노드 배열 */
 }ArrayStack;
 ```
 
@@ -44,7 +44,7 @@ typedef struct tagArrayStack{
 
 ```c
 void AS_CreateStack(ArrayStack** Stack, int Capacity){
-	/* 스택을 자유 저장소에 생성 */
+    /* 스택을 자유 저장소에 생성 */
     (*Stack) = (ArrayStack*)malloc(sizeof(ArrayStack));
     
     /* 입력된 Capacity만큼의 노드를 자유 저장소에 생성 */
@@ -59,7 +59,7 @@ void AS_CreateStack(ArrayStack** Stack, int Capacity){
 
 ```c
 void AS_DestroyStack(ArrayStack* Stack){
-	/* Node를 자유 저장소에서 해제 */
+    /* Node를 자유 저장소에서 해제 */
     free(Stack->Nodes);
     
     /* Stack을 자유 저장소에서 해제 */
@@ -71,7 +71,7 @@ void AS_DestroyStack(ArrayStack* Stack){
 C언어에서는 수가 0부터 시작하기 때문에 코드에서는 TOP의 값을 1만큼 증가시켜준다.
 ```c
 void AS_Push(ArrayStack* Stack, ElementType Data){
-	int Position = Stack->Top;
+    int Position = Stack->Top;
     
     Stack->Nodes[Position].Data = Data;
     Stack->Top++;
@@ -82,7 +82,7 @@ void AS_Push(ArrayStack* Stack, ElementType Data){
 Top 값을 1 낮추고 반드시 데이터를 호출자에게 반환해야 한다.
 ```c
 ElementType AS_Pop(ArrayStack* Stack){
-	int Position = --(Stack->Top);
+    int Position = --(Stack->Top);
     
     return Stack->Nodes[Position].Data;
 }
@@ -93,7 +93,7 @@ ElementType AS_Pop(ArrayStack* Stack){
 Linked List로 Stack을 구현하려면 자신의 위에 위치하는 노드에 대한 포인터를 갖고 있어야 한다.
 ```c
 typedef struct tagNode{
-	char* Data;
+    char* Data;
     struct tagNode* NextNode;
 }Node;
 ```
@@ -102,7 +102,7 @@ Data 필드의 자료형이 int나 double같은 기본 자료형이라면 **값�
 
 ```c
 typedef struct tagLinkedListStack{
-	Node* List;
+    Node* List;
     Node* Top;
 }LinkedListStack;
 ```
@@ -116,16 +116,16 @@ Top 포인터 선언으로 4byte를 소비하지만 Tail 탐색시간에 낭비�
 #### 2. Stack의 생성과 소멸
 ```c
 void LLS_CreateStack(LinkedListStack** Stack){
-	/* 스택을 자유 저장소에 생성 */
+    /* 스택을 자유 저장소에 생성 */
     (*Stack)	   = (LinkedListStack*)malloc(sizeof(LinkedListStack));
     (*Stack)->List = NULL;
     (*Stack)->Top  = NULL;
 }
 
 void LLS_DestroyStack(LinkedListStack* Stack){
-	while( !LLS_IsEmpty(Stack) ){		/* Stack이 빌 때까지 반복 */
-    	Node* popped = LLS_Pop(Stack);   /* 노드를 Stack에서 제거하고 */
-        LLS_DestroyNode(Popped);		 /* 자유 저장소에서 해제한다. */
+    while( !LLS_IsEmpty(Stack) ){		/* Stack이 빌 때까지 반복 */
+    	Node* popped = LLS_Pop(Stack);          /* 노드를 Stack에서 제거하고 */
+        LLS_DestroyNode(Popped);		/* 자유 저장소에서 해제한다. */
     }
     
     /* Stack을 자유 저장소에서 해제 */
@@ -137,24 +137,24 @@ void LLS_DestroyStack(LinkedListStack* Stack){
 1. Stack Node의 생성
 ```c
 Node* LLS_CreateNode(char* NewData){
-	/* 자유 저장소에 노드 할당 */
+    /* 자유 저장소에 노드 할당 */
     Node* NewNode = (Node*)malloc(sizeof(Node));
     
     /* 입력받은 문자열의 크기만큼을 자유 저장소에 할당 */
     NewNode->Data = (char*)malloc(strlen(NewData) + 1);
     
     /* 자유 저장소에 문자열 복사 */
-    strcpy(NewNode->Data, NewData);		/* 데이터를 저장한다. */
+    strcpy(NewNode->Data, NewData);		  /* 데이터를 저장한다. */
     
     NewNode->NextNode = NULL;			  /* 다음 노드에 대한 포인터는 NULL로 초기화한다. */
-    return NewNode; 					   /* 노드의 주소를 반환한다. */
+    return NewNode; 				  /* 노드의 주소를 반환한다. */
 }
 ```
 
 2. Stack Node의 소멸
 ```c
 void LLS_DestroyNode(Node* _Node){
-	free(_Node->Data);
+    free(_Node->Data);
     free(_Node);
 }
 ```
@@ -163,7 +163,7 @@ void LLS_DestroyNode(Node* _Node){
 최상위 Node(Tail)을 찾은 다음 새 Node를 얹은 후 Top필드에 등록한다.
 ```c
 void LLS_Push(LinkedLIstStack* Stack, Node* NewNode){
-	if(Stack->List == NULL){
+    if(Stack->List == NULL){
     	Stack->List = NewNode;
     }
     else{
@@ -172,7 +172,6 @@ void LLS_Push(LinkedLIstStack* Stack, Node* NewNode){
         while(OldTop->NextNode != NULL){
         	OldTop = OldTop->NextNode;
         }
-        
         OldTop->NextNode = NewNode;
     }
     
@@ -192,7 +191,7 @@ void LLS_Push(LinkedLIstStack* Stack, Node* NewNode){
 
 ```c
 Node* LLS_Pop(LinkedListStack* Stack){
-	/* 현재 최상위 노드의 주소를 다른 포인터에 복사해 둔다. */
+    /* 현재 최상위 노드의 주소를 다른 포인터에 복사해 둔다. */
     Node* TopNode = Stack->Top;
     
     if(Stack->List == Stack->Top){

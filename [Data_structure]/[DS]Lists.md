@@ -34,11 +34,11 @@ typedef struct tagNode{
 ```c
 /* 노드 생성 문제 버전 */
 Node* SLL_CreateNode(int NewData){
-	Node NewNode; 			/* 자동 메모리에 새로운 노드 생성 */
+    Node NewNode; 			/* 자동 메모리에 새로운 노드 생성 */
     NewNode.Data = NewData;
     NewNode.NextNode = NULL;
     
-    return &NewNode; 		/* NewNode가 생성된 메모리의 주소를 반환 */
+    return &NewNode; 			/* NewNode가 생성된 메모리의 주소를 반환 */
 }/* 함수가 종료되면서 NewNode는 자동 메모리에서 제거된다. */
 ```
 
@@ -48,10 +48,10 @@ Node* SLL_CreateNode(int NewData){
 ```c
 /* 노드 생성 */
 Node* SLL_CreateNode(ElementType NewData){
-	Node* NewNode = (Node*)malloc(sizeof(Node));
+    Node* NewNode = (Node*)malloc(sizeof(Node));
     
-    NewNode->Data = NewData;	  /* 데이터를 저장한다. */
-    NewNode->NextNode = NULL;	 /* 다음 노드에 대한 포인터는 NULL로 초기화한다. */
+    NewNode->Data = NewData;	  	   /* 데이터를 저장한다. */
+    NewNode->NextNode = NULL;	  	   /* 다음 노드에 대한 포인터는 NULL로 초기화한다. */
     
     return NewNode;			   /* 노드의 주소를 반환한다. */
 }
@@ -69,7 +69,7 @@ void SLL_DestroyNode(Node *Node){
 `SLL_CreateNode()`함수를 이용하여 자유저장소에 노드를 생성한 다음, 새로 생성한 노드의 주소를 Tail의 NextNode 포인터에 대입하면 된다.
 ```c
 void SLL_AppendNode(Node** Head, Node* NewNode){
-	/* 헤드 노드가 NULL이라면 새로운 노드가 Head */
+    /* 헤드 노드가 NULL이라면 새로운 노드가 Head */
     if( (*Head) == NULL ){
     	*Head = NewNode;
     }
@@ -94,7 +94,7 @@ void SLL_AppendNode(Node** Head, Node* NewNode){
 ```c
 /* 노드 탐색 */
 Node* SLL_GetNodeAt(Node* Head, int Location){
-	Node* Current = Head;
+    Node* Current = Head;
     
     /* Head가 없거나 전체 노드를 탐색했을 때 */
     while( Current!=NULL && (--Location)>=0 ){
@@ -110,7 +110,7 @@ Node 삭제 연산은 삭제하고자 하는 노드를 찾은 후, 해당 노드
 ```c
 /* 노드 제거 */
 void SLL_RemoveNode(Node** Head, Nocd* Remove){
-	if( *Head == Remove ){
+    if( *Head == Remove ){
     	*Head = Remove->NextNode;
     }
     else{
@@ -130,7 +130,7 @@ void SLL_RemoveNode(Node** Head, Nocd* Remove){
 ```c
 /* 노드 삽입 */
 void SLL_InsertAfter(Node* Current, Node* NewNode){
-	NewNode->NextNode = Current->NextNode;
+    NewNode->NextNode = Current->NextNode;
     Current->NextNode = NewNode;
 }
 ```
@@ -139,7 +139,7 @@ void SLL_InsertAfter(Node* Current, Node* NewNode){
 ```c
 /* 노드 개수 세기 */
 int SLL_GetNodeCount(Node* Head){
-	int Count = 0;
+    int Count = 0;
     Node* Current = Head;
     
     while( Current != NULL ){
@@ -165,9 +165,9 @@ int SLL_GetNodeCount(Node* Head){
 Linked List의 탐색 기능을 개선한 자료구조로, `Head->Tail` / `Tail->Head` 양방향 탐색이 가능하다. 현재 Node에는 NextNode에 대한 포인터 이외에도 PrevNode에 대한 포인터도 가지고 있다.
 ```c
 typedef struct tagNode{
-	int Data;					/* 데이터필드 */
-    struct tagNode* PrevNode;	/* 이전 노드를 가리키는 포인터 */
-    struct tagNode* NextNode;	/* 다음 노드를 가리키는 포인터 */
+    int Data;					/* 데이터필드 */
+    struct tagNode* PrevNode;			/* 이전 노드를 가리키는 포인터 */
+    struct tagNode* NextNode;			/* 다음 노드를 가리키는 포인터 */
 }Node;
 ```
 
@@ -175,7 +175,7 @@ typedef struct tagNode{
 ```c
 /* 노드 생성 */
 Node* DLL_CreateNode(ElementType NewData){
-	Node* NewNode = (Node*)malloc(sizeof(Node));
+    Node* NewNode = (Node*)malloc(sizeof(Node));
     NewNode->Data = NewData;
     
     NewNode->PrevNode = NULL;
@@ -194,8 +194,8 @@ void DLL_DestroyNode(Node* Node){
 ```c
 /* 노드 추가 */
 void DLL_AppendNode(Node** Head, Node* NewNode){
-	/* Head가 NULL이라면 새로운 노드가 Head */
-	if( (*Head)==NULL ){
+    /* Head가 NULL이라면 새로운 노드가 Head */
+    if( (*Head)==NULL ){
     	*Head = NewNode;
     }
     else{
@@ -214,7 +214,7 @@ void DLL_AppendNode(Node** Head, Node* NewNode){
 #### 4. Node 탐색
 ```c
 Node* DLL_GetNodeAt(Node* Head, int Location){
-	Node* Current = Head;
+    Node* Current = Head;
     while( Current!=NULL && (--Location)>=0 ){
     	Currnet = Current->NextNode;
     }
@@ -227,7 +227,7 @@ Node* DLL_GetNodeAt(Node* Head, int Location){
 ```c
 /* Node 제거 */
 void DLL_RemoveNode(Node** Head, Node* Remove){
-	if( *Head == Remove ){
+    if( *Head == Remove ){
     	*Head = Remove->NextNode;
         if( (*Head)!=NULL )
         	(*Head)->PrevNode = NULL;
@@ -252,7 +252,7 @@ void DLL_RemoveNode(Node** Head, Node* Remove){
 ```c
 /* 노드 삽입 */
 void DLL_InsertAfter( Node* Current, Node* NewNode ){
-	NewNode->NextNode = Current->NextNode;
+    NewNode->NextNode = Current->NextNode;
     NewNode->PrevNode = Currnet;
     
     if( Current->NextNode != NULL ){
@@ -266,7 +266,7 @@ void DLL_InsertAfter( Node* Current, Node* NewNode ){
 ```c
 /* 노드 개수 세기 */
 int DLL_GetNodeCount(Node* Head){
-	unsigned int Count = 0;
+    unsigned int 	Count = 0;
     Node*		Current = Head;
     
     while( Current != NULL ){
@@ -291,7 +291,7 @@ Head와 Tail을 연결한 Linked List로, Tail에 접근하는 비용이 거의 
 ```c
 /* 노드 추가 */
 void CDLL_AppendNode(Node** Head, Node* NewNode){
-	/* Head가 NULL이라면 새로운 노드가 Head */
+    /* Head가 NULL이라면 새로운 노드가 Head */
     if( (*Head)==NULL ){
     	*Head=NewNode;
         (*Head)->NextNode=*Head;
@@ -314,7 +314,7 @@ void CDLL_AppendNode(Node** Head, Node* NewNode){
 ```c
 /* 노드 삭제 */
 void CDLL_RemoveNode(Node** Head, Node* Remove){
-	if( *Head == Remove ){
+    if( *Head == Remove ){
     	(*Head)->NextNode->PrevNode = (*Head)->PrevNode;
         (*Head)->PrevNode->NextNode = (*Head)->NextNode;
 
