@@ -1,4 +1,4 @@
-#Window에 Ruby on Rails 개발환경 만들기
+# Window에 Ruby on Rails 개발환경 만들기
 
 ## 1. railsinstaller 다운
 * **http://railsinstaller.org** 접속 후 `Ruby 2.3` 다운로드
