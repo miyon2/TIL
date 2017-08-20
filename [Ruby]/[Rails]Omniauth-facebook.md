@@ -22,10 +22,10 @@ config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"]
 ```
 
 ```
-$ echo "export FB_APP_ID=APP_ID" >> ~/.bashrc
-$ echo "export FB_APP_SECRET=APP_SECRET" >> ~/.bashrc
+$ echo "export APP_ID=APP_ID" >> ~/.bashrc
+$ echo "export APP_SECRET=APP_SECRET" >> ~/.bashrc
 $ source ~/.bashrc
-$ env | grep FB
+$ env | grep APP
 ```
 
 ### 4. user model - omniauth 연결

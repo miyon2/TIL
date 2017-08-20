@@ -106,7 +106,110 @@ typedef struct tagLinkedListStack{
     Node* Top;
 }LinkedListStack;
 ```
+Top 포인터는 Linked List의 Tail을 가리킴으로써 최상위 노드에 대한 정보를 유지한다.
+Top 포인터 선언으로 4byte를 소비하지만 Tail 탐색시간에 낭비되는 시간을 줄일 수 있다.
+
 **ArrayStack과의 차이점**
 1. Linked List Stack은 Stack의 용량, 최상위 노드의 index가 없다.
 2. Linked List Stack은 Head, Tail에 대한 포인터가 필요하다.
 
+#### 2. Stack의 생성과 소멸
+```c
+void LLS_CreateStack(LinkedListStack** Stack){
+	/* 스택을 자유 저장소에 생성 */
+    (*Stack)	   = (LinkedListStack*)malloc(sizeof(LinkedListStack));
+    (*Stack)->List = NULL;
+    (*Stack)->Top  = NULL;
+}
+
+void LLS_DestroyStack(LinkedListStack* Stack){
+	while( !LLS_IsEmpty(Stack) ){		/* Stack이 빌 때까지 반복 */
+    	Node* popped = LLS_Pop(Stack);   /* 노드를 Stack에서 제거하고 */
+        LLS_DestroyNode(Popped);		 /* 자유 저장소에서 해제한다. */
+    }
+    
+    /* Stack을 자유 저장소에서 해제 */
+    free(Stack);
+}
+```
+
+#### 3. Stack Node의 생성과 소멸
+1. Stack Node의 생성
+```c
+Node* LLS_CreateNode(char* NewData){
+	/* 자유 저장소에 노드 할당 */
+    Node* NewNode = (Node*)malloc(sizeof(Node));
+    
+    /* 입력받은 문자열의 크기만큼을 자유 저장소에 할당 */
+    NewNode->Data = (char*)malloc(strlen(NewData) + 1);
+    
+    /* 자유 저장소에 문자열 복사 */
+    strcpy(NewNode->Data, NewData);		/* 데이터를 저장한다. */
+    
+    NewNode->NextNode = NULL;			  /* 다음 노드에 대한 포인터는 NULL로 초기화한다. */
+    return NewNode; 					   /* 노드의 주소를 반환한다. */
+}
+```
+
+2. Stack Node의 소멸
+```c
+void LLS_DestroyNode(Node* _Node){
+	free(_Node->Data);
+    free(_Node);
+}
+```
+
+#### 4. 삽입(push)연산
+최상위 Node(Tail)을 찾은 다음 새 Node를 얹은 후 Top필드에 등록한다.
+```c
+void LLS_Push(LinkedLIstStack* Stack, Node* NewNode){
+	if(Stack->List == NULL){
+    	Stack->List = NewNode;
+    }
+    else{
+    	/* 최상위 노드를 찾아 NewNode를 쌓는다. */
+        Node* OldTop = Stack->List;
+        while(OldTop->NextNode != NULL){
+        	OldTop = OldTop->NextNode;
+        }
+        
+        OldTop->NextNode = NewNode;
+    }
+    
+    /* Stack의 Top필드에 새 노드의 주소를 등록한다. */
+    Stack->Top = NewNode;
+}
+```
+
+리스트 포인터와 Top 포인터 둘 다에 삽입 Node를 연결해주어야 하므로 if문과 Top포인터의 새 노드지정이 필요하다.
+
+#### 5. 제거(Pop)연산
+제거 연산은 다음 네가지 단계로 수행된다.
+1. 현재 최상위 노드의 주소를 다른 포인터에 복사해 둔다.
+2. 새로운 최상위 노드, 즉 현재 최상위 노드의 바로 이전(아래) 노드를 찾는다.
+3. LinkedListStack 구조체의 Top필드에 새로운 최상위 노드의 주소를 등록한다.
+4. <1>에서 포인터에 저장해둔 옛 최상위 노드의 주소를 반환한다.
+
+```c
+Node* LLS_Pop(LinkedListStack* Stack){
+	/* 현재 최상위 노드의 주소를 다른 포인터에 복사해 둔다. */
+    Node* TopNode = Stack->Top;
+    
+    if(Stack->List == Stack->Top){
+    	Stack->List = NULL;
+        Stack->Top = NULL;
+    }
+    else{
+    	/* 새로운 최상위 노드를 Stack의 Top필드에 등록한다. */
+    	Node* CurrentTop = Stack->List;
+        
+        while(CurrentTop!=NULL && CurrentTop->NextNode!=Stack->Top){
+    		CurrentTop = CurrentTop->NextNode;
+    	}
+        Stack->Top = CurrentTop;
+    	CurrentTop->NextNode = NULL;
+    }
+    
+    return TopNode;
+}
+```
