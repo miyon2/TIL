@@ -1,4 +1,4 @@
-#Rails 및 Rbenv 설치 오류
+# Rails 및 Rbenv 설치 오류
 ```
 $ export PATH="$HOME/.rbenv/bin:$PATH"
 $ eval "$(rbenv init -)"
@@ -11,7 +11,7 @@ $ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 ```
 를 입력할 경우 terminal을 reboot해도 PATH설정이 고정되어있다.
 
-#RVM 제거
+# RVM 제거
 ```
 $rvm implode
 ```	
