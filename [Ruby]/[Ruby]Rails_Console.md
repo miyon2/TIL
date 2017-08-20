@@ -1,5 +1,5 @@
-#Rails console
-##pry
+# Rails console
+## pry
 **irb console을 바꿔준다**
 **https://github.com/pry/pry**
 ```ruby
@@ -10,7 +10,7 @@ $ bundle
 $ irb
 ```
 
-##pry-rails
+## pry-rails
 **rails console을 바꿔준다**
 **https://github.com/rweng/pry-rails**
 ```ruby
@@ -21,7 +21,7 @@ $ bundle
 $ rails c
 ```
 
-##awesome_print
+## awesome_print
 **console 창에서 출력되는 화면을 어-썸하게 바꿔준다**
 **https://github.com/awesome-print/awesome_print**
 ```ruby
@@ -32,7 +32,7 @@ $ bundle install
 $ vi ~/.pryrc
 ```
 
-##faker
+## faker
 **더미 데이터 다루기**
 **https://github.com/stympy/faker**
 ```ruby
