@@ -36,10 +36,10 @@ typedef struct tagNode{
 순환 큐의 구조체
 ```c
 typedef struct tagCircularQueue{
-	int Capacity;		/* 용량 */
-	int Front;		   /* 전단의 인덱스 - 실제 메모리주소가 아닌 인덱스 */
-    int Rear;			/* 후단의 인덱스 - 실제 메모리주소가 아닌 인덱스 */
-    Node* Nodes;		 /* 노드 배열 - 자유 저장소에 생성 */
+    int Capacity;		   /* 용량 */
+    int Front;		  	   /* 전단의 인덱스 - 실제 메모리주소가 아닌 인덱스 */
+    int Rear;			   /* 후단의 인덱스 - 실제 메모리주소가 아닌 인덱스 */
+    Node* Nodes;		   /* 노드 배열 - 자유 저장소에 생성 */
 }CircularQueue;
 ```
 
@@ -48,7 +48,7 @@ typedef struct tagCircularQueue{
 `CQ_CreateQueue()` 함수는 먼저 순환 큐를 자유 저장소에 생성한 다음, `Node의 크기 X (Capacity + 1)`의 크기로 배열을 자유 저장소에 할당한다. (상태 구분을 위한 Dummy Node가 필요하기 때문)
 ```c
 void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
-	/* Queue를 자유 저장소에 생성 */
+    /* Queue를 자유 저장소에 생성 */
     (*Queue) = (CircularQueue*)malloc(sizeof(CircularQueue));
     
     /* 입력된 Capacity+1 만큼의 노드를 자유 저장소에 생성 */
@@ -62,7 +62,7 @@ void CQ_CreateQueue(CircularQueue** Queue, int Capacity){
 
 ```c
 void CQ_DestroyQueue(CircularQueue* Queue){
-	free(Queue->Nodes);
+    free(Queue->Nodes);
     free(Queue);
 }
 ```
@@ -71,7 +71,7 @@ void CQ_DestroyQueue(CircularQueue* Queue){
 Rear의 위치를 잘 파악하는게 중요하다. 
 ```c
 void CQ_Enqueue(CircularQueue* Queue, ElementType Data){
-	int Position = 0;
+    int Position = 0;
     
     if(Queue->Rear == Queue->Capacity){
     	Position = Queue->Rear;
@@ -87,7 +87,7 @@ void CQ_Enqueue(CircularQueue* Queue, ElementType Data){
 #### 4. 제거(Dequeue)연산
 ```c
 ElementType CQ_Dequeue(DircularQueue* Queue){
-	int Position = Queue->Front;
+    int Position = Queue->Front;
     
     /* 전단이 곧 배열의 끝에 도달해 있다. */
     if(Queue->Front == Queue->Capacity){
@@ -105,7 +105,7 @@ ElementType CQ_Dequeue(DircularQueue* Queue){
 전단과 후단이 같은지 확인한다.
 ```c
 int CQ_IsEmpty(CircularQueue* Queue){
-	return (Queue->Front == Queue->Rear);
+    return (Queue->Front == Queue->Rear);
 }
 ```
 
@@ -116,7 +116,7 @@ int CQ_IsEmpty(CircularQueue* Queue){
 
 ```c
 int CQ_IsFull(CircularQueue* Queue){
-	if(Queue->Front < Queue->Rear){
+    if(Queue->Front < Queue->Rear){
     	return (Queue->Rear - Queue->Front) == Queue->Capacity;
     }
     else{
@@ -130,14 +130,14 @@ int CQ_IsFull(CircularQueue* Queue){
 Node의 선언
 ```c
 typedef struct tagNode{
-	char* Data;
+    char* Data;
     struct tagNode* NextNode;
 }Node;
 ```
 Linked Queue의 선언
 ```c
 typedef struct tagLinkedQueue{
-	Node* Front;
+    Node* Front;
     Node* Rear;
     int Count;		/* Node의 수 */
 }LinkedQueue;
@@ -147,7 +147,7 @@ typedef struct tagLinkedQueue{
 `LQ_CreateQueue()`는 자유저장소에 LinkedQueue 구조체를 생성하고 각 필드를 초기화한다.
 ```c
 void LQ_CreateQueue(LinkedQueue** Queue){
-	(Queue*)	    = (LinkedQueue*)malloc(sizeof(LinkedQueue));
+    (Queue*)	    = (LinkedQueue*)malloc(sizeof(LinkedQueue));
     (Queue*)->Front = NULL;
     (Queue*)->Rear  = NULL;
     (Queue*)->Count = 0;
@@ -156,7 +156,7 @@ void LQ_CreateQueue(LinkedQueue** Queue){
 `LQ_DestroyQueue()`함수는 큐 내부에 있는 모든 노드를 자유 저장소에서 제거하고, 큐도 자유 저장소에서 제거한다.
 ```c
 void LQ_DestroyQueue(LinkedQueue* Queue){
-	while(!LQ_IsEmpty(Queue)){
+    while(!LQ_IsEmpty(Queue)){
     	Node* Popped = LQ_Dequeue(&Queue);
         LQ_DestroyNode(Popped);
     }
@@ -169,8 +169,8 @@ void LQ_DestroyQueue(LinkedQueue* Queue){
 후단에 새 노드를 붙인다.
 ```c
 void LQ_Enqueue(LinkedQueue* Queue, Node* NewNode){
-	if(Queue->Front == NULL){
-		Queue->Front = NewNode;
+    if(Queue->Front == NULL){
+	Queue->Front = NewNode;
         Queue->Rear = NewNode;
         Queue->Count++;
     }
@@ -185,7 +185,7 @@ void LQ_Enqueue(LinkedQueue* Queue, Node* NewNode){
 #### 4. 제거(Dequeue)연산
 ```c
 Node* LQ_Dequeue(LinkedQueue* Queue){
-	/* LQ_Dequeue() 함수가 반환할 최상위 노드 */
+    /* LQ_Dequeue() 함수가 반환할 최상위 노드 */
     Node* Front = Queue->Front;
     
     if(Queue->Front->NextNode == NULL){
