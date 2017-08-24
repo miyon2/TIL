@@ -68,4 +68,136 @@ void CQ_DestroyQueue(CircularQueue* Queue){
 ```
 
 #### 3. 삽입(Enqueue)연산
+Rear의 위치를 잘 파악하는게 중요하다. 
+```c
+void CQ_Enqueue(CircularQueue* Queue, ElementType Data){
+	int Position = 0;
+    
+    if(Queue->Rear == Queue->Capacity){
+    	Position = Queue->Rear;
+        Queue->Rear;
+    }
+    else{
+    	Position = Queue->Rear++;
+    }
+    Queue->Nodes[Position].Data = Data;
+}
+```
 
+#### 4. 제거(Dequeue)연산
+```c
+ElementType CQ_Dequeue(DircularQueue* Queue){
+	int Position = Queue->Front;
+    
+    /* 전단이 곧 배열의 끝에 도달해 있다. */
+    if(Queue->Front == Queue->Capacity){
+    	Queue->Front = 0;
+    }
+    else{
+    	Queue->Front++;
+    }
+    
+    return Queue->Nodes[Position].Data;
+}
+```
+
+#### 5. 공백상태 확인
+전단과 후단이 같은지 확인한다.
+```c
+int CQ_IsEmpty(CircularQueue* Queue){
+	return (Queue->Front == Queue->Rear);
+}
+```
+
+#### 6. 포화 상태 확인
+두가지 경우를 고려해야 한다.
+1. 순환 큐 배열 내에서 전단이 후단 앞에 위치하는 경우, 후단과 전단의 차가 큐의 용량과 동일한지를 봐야한다.
+2. 전단이 후단 뒤에 위치하는 경우에는 Rear에 1을 더한 값이 Front와 같은지를 봐야한다.
+
+```c
+int CQ_IsFull(CircularQueue* Queue){
+	if(Queue->Front < Queue->Rear){
+    	return (Queue->Rear - Queue->Front) == Queue->Capacity;
+    }
+    else{
+    	return (Queue->Rear)+1 == Queue->Front;
+    }
+}
+```
+
+## 4. Linked Queue(링크드 큐)
+#### 1. Linked Queue와 Node의 선언
+Node의 선언
+```c
+typedef struct tagNode{
+	char* Data;
+    struct tagNode* NextNode;
+}Node;
+```
+Linked Queue의 선언
+```c
+typedef struct tagLinkedQueue{
+	Node* Front;
+    Node* Rear;
+    int Count;		/* Node의 수 */
+}LinkedQueue;
+```
+
+#### 2. Linked Queue의 생성과 소멸
+`LQ_CreateQueue()`는 자유저장소에 LinkedQueue 구조체를 생성하고 각 필드를 초기화한다.
+```c
+void LQ_CreateQueue(LinkedQueue** Queue){
+	(Queue*)	    = (LinkedQueue*)malloc(sizeof(LinkedQueue));
+    (Queue*)->Front = NULL;
+    (Queue*)->Rear  = NULL;
+    (Queue*)->Count = 0;
+}
+```
+`LQ_DestroyQueue()`함수는 큐 내부에 있는 모든 노드를 자유 저장소에서 제거하고, 큐도 자유 저장소에서 제거한다.
+```c
+void LQ_DestroyQueue(LinkedQueue* Queue){
+	while(!LQ_IsEmpty(Queue)){
+    	Node* Popped = LQ_Dequeue(&Queue);
+        LQ_DestroyNode(Popped);
+    }
+    /* Queue를 자유 저장소에서 해제 */
+    free(Queue);
+}
+```
+
+#### 3. 삽입(Enqueue)연산
+후단에 새 노드를 붙인다.
+```c
+void LQ_Enqueue(LinkedQueue* Queue, Node* NewNode){
+	if(Queue->Front == NULL){
+		Queue->Front = NewNode;
+        Queue->Rear = NewNode;
+        Queue->Count++;
+    }
+    else{
+    	Queue->Rear->NextNode = NewNode;	/* 기존 Rear의 다음노드에 새 노드 주소 지정 */
+    	Queue->Rear = NewNode;	/* Rear에 새 노드 주소 지정 */
+        Queue->Count++;
+    }
+}
+```
+
+#### 4. 제거(Dequeue)연산
+```c
+Node* LQ_Dequeue(LinkedQueue* Queue){
+	/* LQ_Dequeue() 함수가 반환할 최상위 노드 */
+    Node* Front = Queue->Front;
+    
+    if(Queue->Front->NextNode == NULL){
+    	Queue->Front = NULL;
+        Queue->Rear = NULL;
+    }
+    else{
+    	Queue->Front = Queue->Front->NextNode;
+    }
+    
+    Queue->Count--;
+    
+    return Front;
+}
+```
