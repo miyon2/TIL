@@ -77,7 +77,7 @@ Node 내에 두개의 포인터를 가지게 된다. 한개는 자식노드를 �
 typedef char ElementType;
 
 typedef struct tagLCRSNode{
-	struct tagLCRSNode* LeftChild;
+    struct tagLCRSNode* LeftChild;
     struct tagLCRSNode* RightSibling;
     
     ElementType Data;
@@ -88,7 +88,7 @@ typedef struct tagLCRSNode{
 `malloc()`을 이용하여 자유저장소에 `LCRSNode` 구조체의 크기만큼을 할당하고 매개변수 `NewData`를 `Data`에 저장한 뒤, 그 주소를 반환한다.
 ```c
 LCRSNode* LCRS_CreateNode(ElementType NewData){
-	LCRSNode* NewNode = (LCRSNode*)malloc(sizeof(LCRSNode));
+    LCRSNode* NewNode = (LCRSNode*)malloc(sizeof(LCRSNode));
     NewNode->LeftChild	= NULL;
     NewNode->RightSibling = NULL;
     NewNode->Data = NewData;
@@ -97,7 +97,7 @@ LCRSNode* LCRS_CreateNode(ElementType NewData){
 }
 
 void LCRS_DestroyNode(LCRSNode* Node){
-	free(Node);
+    free(Node);
 }
 ```
 
@@ -106,13 +106,13 @@ void LCRS_DestroyNode(LCRSNode* Node){
 먼저 Parent에게 자식 노드가 있는지를 검사한 후 **NULL**인경우 `LeftChild`에 추가하고 이미 존재하는 경우에는 자식노드의 `RightSibling`에 대입한다.
 ```c
 void LCRS_AddChildNode(LCRSNode* Parent, LCRSNode *Child){
-	if(Parent->LeftChild == NULL){
+    if(Parent->LeftChild == NULL){
     	Parent->LeftChild = Child;
     }
     else{
     	LCRSNode* TempNode = Parent->LeftChild;
         while(TempNode->RightSibling != NULL){
-        	TempNode = TempNode->RightSibling;
+            TempNode = TempNode->RightSibling;
         }
         TempNode->RightSibling = Child;
     }
@@ -123,7 +123,7 @@ void LCRS_AddChildNode(LCRSNode* Parent, LCRSNode *Child){
 들여쓰기로 출력하는 방법을 구현한다.
 ```c
 void LCRS_PrintTree(LCRSNode* Node, int Depth){
-	int i=0;
+    int i=0;
     
     /* 깊이만큼 들여쓰기를 한다. */
     for(i=0; i<Depth; i++){
