@@ -74,10 +74,10 @@ typedef struct tagSBTNode{
 `malloc()`을 이용해 자유 저장소에 SBTNode 구조체의 크기만큼 할당하고, 이렇게 할당한 메모리 공간을 NewNode 포인터에 저장한다.
 ```c
 SBTNode* SBT_CreateNode(ElementType NewData){
-    SBTNode* NewNode   = (SBTNode*)malloc(sizeof(SBTNode));
-    NewNode->Left 	 = NULL;
-    NewNode->RIght 	= NULL;
-    NewNode->Data 	 = NewData;
+    SBTNode* NewNode       = (SBTNode*)malloc(sizeof(SBTNode));
+    NewNode->Left 	   = NULL;
+    NewNode->RIght 	   = NULL;
+    NewNode->Data 	   = NewData;
     
     return NewNode;
 }
