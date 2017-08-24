@@ -64,7 +64,7 @@ SBT(Simple Binary Tree)
 typedef char ElementType;
 
 typedef struct tagSBTNode{
-	struct tagSBTNode* Left;
+    struct tagSBTNode* Left;
     struct tagSBTNode* Right;
     ElementType Data;
 }SBTNode;
@@ -74,7 +74,7 @@ typedef struct tagSBTNode{
 `malloc()`을 이용해 자유 저장소에 SBTNode 구조체의 크기만큼 할당하고, 이렇게 할당한 메모리 공간을 NewNode 포인터에 저장한다.
 ```c
 SBTNode* SBT_CreateNode(ElementType NewData){
-	SBTNode* NewNode   = (SBTNode*)malloc(sizeof(SBTNode));
+    SBTNode* NewNode   = (SBTNode*)malloc(sizeof(SBTNode));
     NewNode->Left 	 = NULL;
     NewNode->RIght 	= NULL;
     NewNode->Data 	 = NewData;
@@ -83,14 +83,14 @@ SBTNode* SBT_CreateNode(ElementType NewData){
 }
 
 void SBT_DestroyNode(SBTNode* Node){
-	free(Node);
+    free(Node);
 }
 ```
 
 #### 3. 전위 순회를 이용한 Binary Tree 출력 구현
 ```c
 void SBT_PreorderPrintTree(SBTNode* Node){
-	if(Node == NULL){
+    if(Node == NULL){
     	return;
     }
     
@@ -108,7 +108,7 @@ void SBT_PreorderPrintTree(SBTNode* Node){
 #### 4. 중위 순회를 이용한 Binary Tree 출력 구현
 ```c
 void SBT_InorderPrintTree(SBTNode* Node){
-	if(Node == NULL){
+    if(Node == NULL){
     	return;
     }
     
@@ -126,7 +126,7 @@ void SBT_InorderPrintTree(SBTNode* Node){
 #### 5. 후위 순회를 이용한 Binary Tree 출력 구현
 ```c
 void SBT_PostorderPrintTree(SBTNode* Node){
-	if(Node == NULL){
+    if(Node == NULL){
     	return;
     }
     
@@ -145,7 +145,7 @@ void SBT_PostorderPrintTree(SBTNode* Node){
 Tree를 파괴할 때는 반드시 잎 노드부터 자유 저장소에서 제거해야 한다. 따라서 후위 순회를 이용하면 Binary Tree를 문제 없이 소멸시킬 수 있다.
 ```c
 void ET_DestroyTree(ETNode* Root){
-	if(Root == NULL){
+    if(Root == NULL){
     	return;
     }
     
