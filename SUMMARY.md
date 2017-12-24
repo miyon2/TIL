@@ -1,7 +1,5 @@
 # [API]
  * [Daum map API]([API]/[API]Daum_map_API.md)
-# [Blog]
- * [jekyll 사용법]([Blog]/[Tutorials]jekyll사용법.md)
 # [C]
  * [멤버연산자]([C]/[C]멤버연산자.md)
  * [include 방식]([C]/[C]include방식_차이점.md)
