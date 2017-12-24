@@ -1,15 +1,15 @@
-# [API]
+* [API]
  * [Daum map API]([API]/[API]Daum_map_API.md)
-# [C]
+* [C]
  * [멤버연산자]([C]/[C]멤버연산자.md)
  * [include 방식]([C]/[C]include방식_차이점.md)
-# [Data Structure]
+* [Data Structure]
  * [Stack]([Data_structure]/[DS]Stack.md)
  * [Queue]([Data_structure]/[DS]Queue.md)
  * [List]([Data_structure]/[DS]Lists.md)
  * [Tree]([Data_structure]/[DS].Treemd)
  * [Binary Tree]([Data_structure]/[DS]Binary_Tree.md)
-# [HTML/CSS]
+* [HTML/CSS]
  * [1강]([HTML/CSS]/[HTML/CSS]1강.md)
  * [2강]([HTML/CSS]/[HTML/CSS]2강.md)
  * [5강]([HTML/CSS]/[HTML/CSS]5강.md)
@@ -18,7 +18,7 @@
  * [11강]([HTML/CSS]/[HTML/CSS]11강.md)
  * [14-3/14-4강]([HTML/CSS]/[HTML/CSS]14-3_14-4강.md)
  * [14-5강]([HTML/CSS]/[HTML/CSS]14-5강.md)
-# [Rails]
+* [Rails]
  * [Gem/kaminari]([Ruby]/[Rails]Gem_kaminari.md)
  * [Gem/Nokogiri]([Ruby]/[Rails]Gem_Nokogiri.md)
  * [Gem/Searchkick]([Ruby]/[Rails]Gem_Searchkick_사용하기.md)
@@ -33,7 +33,7 @@
  * [Rails console]([Ruby]/[Ruby]Rails_Console.md)
  * [Rails routes]([Ruby]/[Ruby]rails_routes.md)
  * [rbenv error]([Ruby]/[Ruby]rbenv설치오류.md)
-# [Swift]
+* [Swift]
  * [Edwith 내용 정리]([Swift]/[Edwith]Swift_핵심문법.md)
-# [Linux]
+* [Linux]
 
