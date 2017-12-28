@@ -36,4 +36,6 @@
 * [Swift]
  * [Edwith 내용 정리]([Swift]/[Edwith]Swift_핵심문법.md)
 * [Linux]
+ * [1장) UNIX의 기초]([Linux]/[리눅스시스템의_이해와_활용]1장.md)
+ * [2장) UNIX의 기초]([Linux]/[리눅스시스템의_이해와_활용]2장.md)
 
