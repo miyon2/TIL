@@ -6,13 +6,13 @@
 5. 제한을 추가하거나 Rack 엔드포인트 추가하는 방법
 
 ## 1. 라우터의 목적
-### **++컨트롤러의 액션에 요청 매칭시켜주기!++**
+### **컨트롤러의 액션에 요청 매칭시켜주기!**
 ```ruby
 GET /posts/17 					 #이러한 요청을 받을경우
 get '/posts/:id', to: 'posts#show' #posts컨트롤러의 show액션에 연결!
 ```
 
-### **++코드로부터 URL 생성하기++**
+### **코드로부터 URL 생성하기**
 1. route.rb
 ```ruby
 get '/posts/:id', to: 'posts#show', as: 'post'
@@ -46,6 +46,7 @@ namespace :admin do
 	resources :posts, :comments
 end
 ```
+
 | 경로 | 액션 | 헬퍼 |
 |--------|--------|--------|
 | /admin/posts | admin/posts#index | admin_posts_path |
@@ -60,6 +61,7 @@ end
 ```ruby
 resources :posts, path: '/admin/posts'
 ```
+
 | 경로 | 액션 | 헬퍼 |
 |--------|--------|--------|
 | /admin/posts | posts#index | posts_path |
